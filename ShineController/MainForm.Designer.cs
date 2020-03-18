@@ -43,6 +43,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnLaunchMusicAnalyzer = new System.Windows.Forms.Button();
+            this.lbxAudioDevices = new System.Windows.Forms.ListBox();
+            this.btnEnableMusic = new System.Windows.Forms.Button();
+            this.btnDisableMusic = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbrIntensity)).BeginInit();
             this.SuspendLayout();
             // 
@@ -168,11 +171,43 @@
             this.btnLaunchMusicAnalyzer.UseVisualStyleBackColor = true;
             this.btnLaunchMusicAnalyzer.Click += new System.EventHandler(this.btnLaunchMusicAnalyzer_Click);
             // 
+            // lbxAudioDevices
+            // 
+            this.lbxAudioDevices.FormattingEnabled = true;
+            this.lbxAudioDevices.ItemHeight = 16;
+            this.lbxAudioDevices.Location = new System.Drawing.Point(579, 12);
+            this.lbxAudioDevices.Name = "lbxAudioDevices";
+            this.lbxAudioDevices.Size = new System.Drawing.Size(153, 116);
+            this.lbxAudioDevices.TabIndex = 13;
+            // 
+            // btnEnableMusic
+            // 
+            this.btnEnableMusic.Location = new System.Drawing.Point(580, 136);
+            this.btnEnableMusic.Name = "btnEnableMusic";
+            this.btnEnableMusic.Size = new System.Drawing.Size(152, 42);
+            this.btnEnableMusic.TabIndex = 14;
+            this.btnEnableMusic.Text = "Enable";
+            this.btnEnableMusic.UseVisualStyleBackColor = true;
+            this.btnEnableMusic.Click += new System.EventHandler(this.btnEnableMusic_Click);
+            // 
+            // btnDisableMusic
+            // 
+            this.btnDisableMusic.Location = new System.Drawing.Point(579, 183);
+            this.btnDisableMusic.Name = "btnDisableMusic";
+            this.btnDisableMusic.Size = new System.Drawing.Size(152, 42);
+            this.btnDisableMusic.TabIndex = 15;
+            this.btnDisableMusic.Text = "Disable";
+            this.btnDisableMusic.UseVisualStyleBackColor = true;
+            this.btnDisableMusic.Click += new System.EventHandler(this.btnDisableMusic_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 311);
+            this.Controls.Add(this.btnDisableMusic);
+            this.Controls.Add(this.btnEnableMusic);
+            this.Controls.Add(this.lbxAudioDevices);
             this.Controls.Add(this.btnLaunchMusicAnalyzer);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -211,6 +246,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnLaunchMusicAnalyzer;
+        private System.Windows.Forms.ListBox lbxAudioDevices;
+        private System.Windows.Forms.Button btnEnableMusic;
+        private System.Windows.Forms.Button btnDisableMusic;
     }
 }
 

@@ -14,12 +14,13 @@ namespace ShineController
     public partial class MainForm : Form
     {
         StationController sc;
-        
+        MusicAnalyzer ma;
 
         public MainForm()
         {
             InitializeComponent();
             RestartStationController();
+            RestartMusicAnalyzer();
             for (int i = 1; i < 4; i++)
             {
                 cbxColor.Items.Add(i);
@@ -87,9 +88,33 @@ namespace ShineController
             RestartStationController();
         }
 
+        private void RestartMusicAnalyzer()
+        {
+            ma = new MusicAnalyzer(sc);
+            if (ma._devicelist.Count < 1)
+            {
+                return;
+            }
+            foreach (AudioDevice a in ma._devicelist)
+            {
+                lbxAudioDevices.Items.Add(a.deviceIndex);
+            }
+            lbxAudioDevices.SelectedIndex = 0;
+        }
+
         private void btnLaunchMusicAnalyzer_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void btnEnableMusic_Click(object sender, EventArgs e)
+        {
+            ma.Enable((int)lbxAudioDevices.SelectedItem);
+        }
+
+        private void btnDisableMusic_Click(object sender, EventArgs e)
+        {
+            ma.Disable();
         }
     }
 }
