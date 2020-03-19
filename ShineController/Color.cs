@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace ShineController
 {
-    enum Color
+    class Color
     {
-        Red = 1,
-        Green,
-        Blue
+        public byte Red;
+        public byte Green;
+        public byte Blue;
+
+        public Color(byte r, byte g, byte b)
+        {
+            Red = r;
+            Green = g;
+            Blue = b;
+        }
     }
 }

@@ -62,7 +62,7 @@ namespace ShineController
             }
             else
             {
-                Console.WriteLine("Bad message received: " + Encoding.UTF8.GetString(received));
+                //Console.WriteLine("Bad message received: " + Encoding.UTF8.GetString(received));
             }
             
 
@@ -86,7 +86,7 @@ namespace ShineController
             SendMessage(Commands.RegisterRequest);
         }
 
-        public void SendColor(Color color, int brightness)
+        public void SendColor(ColorChannel color, int brightness)
         {
             byte[] message = new byte[2];
             message[0] = (byte)color;
@@ -94,7 +94,7 @@ namespace ShineController
             SendMessage(Commands.SetColor, message);
         }
 
-        public void SendColor(Color color, int brightness, string deviceID)
+        public void SendColor(ColorChannel color, int brightness, string deviceID)
         {
             foreach (Station s in this.stations)
             {

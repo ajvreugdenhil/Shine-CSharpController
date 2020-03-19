@@ -20,29 +20,31 @@ namespace ShineController
     {
         private StationController sc;
 
-        private bool _enabled;              
+        private bool _enabled;
         private DispatcherTimer _t;         //timer that refreshes the display
         private float[] _fft;               //buffer for fft data        
         private WASAPIPROC _process;        //callback function to obtain data        
         private int _hanctr;                //last output level counter
-        private List<byte> _spectrumdata;   //spectrum data buffer
+        private List<byte> spectrumdata;   //spectrum data buffer
         public List<AudioDevice> _devicelist;       //device list
-        private bool _initialized;          //initialized flag
-        private int devindex;               //used device index
-        private int _lines = 16;            // number of spectrum lines
+        public bool _initialized;          //initialized flag
+        private int _lines = 64;            // number of spectrum lines
+        private List<List<byte>> spectrumdataHistory;
+        private int spectrumdataHistoryLength = 1600;
 
         public MusicAnalyzer(StationController sc)
         {
             this.sc = sc;
-
+            this.color = new Color(255,255,255);
             _fft = new float[1024];
             _hanctr = 0;
             _t = new DispatcherTimer();
             _t.Tick += _t_Tick;
-            _t.Interval = TimeSpan.FromMilliseconds(50); //40hz refresh rate //default 25
+            _t.Interval = TimeSpan.FromMilliseconds(5); //25 -> 40hz refresh rate
             _t.IsEnabled = false;
             _process = new WASAPIPROC(Process);
-            _spectrumdata = new List<byte>();
+            spectrumdata = new List<byte>();
+            spectrumdataHistory = new List<List<byte>>();
             _devicelist = new List<AudioDevice>();
             _initialized = false;
             Init();
@@ -64,6 +66,8 @@ namespace ShineController
             }
             return false;
         }
+
+        public Color color { get; set; }
 
         public bool Enable(int deviceIndex)
         {
@@ -138,20 +142,23 @@ namespace ShineController
                 y = (int)(Math.Sqrt(peak) * 3 * 255 - 4);
                 if (y > 255) y = 255;
                 if (y < 0) y = 0;
-                _spectrumdata.Add((byte)y);
+                spectrumdata.Add((byte)y);
             }
 
             // use (_spectrumdata)
-            _spectrumdata.Clear();
-
-
-            int level = BassWasapi.BASS_WASAPI_GetLevel();
-            string visu = "";
-            for (int i = 0; i < (level/40000); i++)
+            // it's an array of values 0-255
+            spectrumdataHistory.Add(new List<byte>(spectrumdata));
+            if (spectrumdataHistory.Count > spectrumdataHistoryLength)
             {
-                visu += "I";
+                // If the list gets bigger than set number, remove oldest entry
+                spectrumdataHistory.RemoveAt(0);
             }
-            Console.WriteLine(visu);
+            HandleSpectrumDataHistory(spectrumdataHistory);
+            spectrumdata.Clear();
+
+
+            //int level = BassWasapi.BASS_WASAPI_GetLevel();
+            
 
             //Required, because some programs hang the output. If the output hangs for a 75ms
             //this piece of code re initializes the output
@@ -166,6 +173,59 @@ namespace ShineController
             }
         }
 
+        private int GetVolume(List<byte> sd, int low, int high)
+        {
+            int InterestVolume = 0;
+            for (int i = low; i < high; i++)
+            {
+                InterestVolume += sd[i];
+            }
+            InterestVolume /= high - low;
+            return InterestVolume;
+        }
+
+
+        private void HandleSpectrumDataHistory(List<List<byte>> history)
+        {
+            int startInterestZone = 0;
+            int endInterestZone = 16;
+
+            List<byte> spectrumdata = history[history.Count - 1];
+
+            int lowest = 254;
+            int highest = 1;
+            for (int i = 1; i < history.Count - 1; i ++)
+            {
+                int volume = GetVolume(history[i], startInterestZone, endInterestZone);
+                if (volume < lowest) lowest = volume;
+                if (volume > highest) highest = volume;
+            }
+            /*
+            byte b = (byte)(highest * 5);
+            byte g = 0;
+            byte r = (byte)(255 - (highest * 10));
+            Color color = new Color(r, g, b);
+            */
+
+            int volumeRange = highest - lowest;
+            if (volumeRange < 1) volumeRange = 1;
+            double volumeFactor = (254 /  volumeRange);
+
+            int InterestVolume = GetVolume(spectrumdata, startInterestZone, endInterestZone);
+           
+            InterestVolume -= lowest;
+            InterestVolume = (int)((double)InterestVolume * volumeFactor);
+            
+            if (InterestVolume < 0) InterestVolume = 0;
+            if (InterestVolume > 254) InterestVolume = 254;
+
+
+            sc.SendColor(ColorChannel.Red, (int)(InterestVolume * ((double)color.Red / 255)));
+            sc.SendColor(ColorChannel.Green, (int)(InterestVolume * ((double)color.Green / 255)));
+            sc.SendColor(ColorChannel.Blue, (int)(InterestVolume * ((double)color.Blue / 255)));
+            
+
+        }
 
 
 

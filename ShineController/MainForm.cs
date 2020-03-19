@@ -30,7 +30,9 @@ namespace ShineController
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+            sc.SendColor(ColorChannel.Red, 0);
+            sc.SendColor(ColorChannel.Green, 0);
+            sc.SendColor(ColorChannel.Blue, 0);
         }
 
         private void updateStationsTimer_Tick(object sender, EventArgs e)
@@ -53,7 +55,7 @@ namespace ShineController
         private void btnSendColor_Click(object sender, EventArgs e)
         {
             string id = (string)lbxStations.SelectedItem;
-            sc.SendColor((Color)cbxColor.SelectedItem, tbrIntensity.Value, id);
+            sc.SendColor((ColorChannel)cbxColor.SelectedItem, tbrIntensity.Value, id);
         }
 
         private void RestartStationController()
@@ -115,6 +117,12 @@ namespace ShineController
         private void btnDisableMusic_Click(object sender, EventArgs e)
         {
             ma.Disable();
+            //ma._initialized = false;
+        }
+
+        private void btnSetColor_Click(object sender, EventArgs e)
+        {
+            ma.color = new Color((byte)tbrRed.Value, (byte)tbrGreen.Value, (byte)tbrBlue.Value);
         }
     }
 }

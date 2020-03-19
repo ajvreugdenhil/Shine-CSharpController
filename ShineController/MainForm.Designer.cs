@@ -42,11 +42,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnLaunchMusicAnalyzer = new System.Windows.Forms.Button();
             this.lbxAudioDevices = new System.Windows.Forms.ListBox();
             this.btnEnableMusic = new System.Windows.Forms.Button();
             this.btnDisableMusic = new System.Windows.Forms.Button();
+            this.tbrRed = new System.Windows.Forms.TrackBar();
+            this.tbrGreen = new System.Windows.Forms.TrackBar();
+            this.tbrBlue = new System.Windows.Forms.TrackBar();
+            this.btnSetColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbrIntensity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbrRed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbrGreen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbrBlue)).BeginInit();
             this.SuspendLayout();
             // 
             // updateStationsTimer
@@ -102,7 +108,7 @@
             // 
             // btnRestartStationController
             // 
-            this.btnRestartStationController.Location = new System.Drawing.Point(12, 234);
+            this.btnRestartStationController.Location = new System.Drawing.Point(15, 233);
             this.btnRestartStationController.Name = "btnRestartStationController";
             this.btnRestartStationController.Size = new System.Drawing.Size(206, 49);
             this.btnRestartStationController.TabIndex = 5;
@@ -161,30 +167,20 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "remote port";
             // 
-            // btnLaunchMusicAnalyzer
-            // 
-            this.btnLaunchMusicAnalyzer.Location = new System.Drawing.Point(579, 231);
-            this.btnLaunchMusicAnalyzer.Name = "btnLaunchMusicAnalyzer";
-            this.btnLaunchMusicAnalyzer.Size = new System.Drawing.Size(153, 52);
-            this.btnLaunchMusicAnalyzer.TabIndex = 12;
-            this.btnLaunchMusicAnalyzer.Text = "Launch MusicAnalyzer";
-            this.btnLaunchMusicAnalyzer.UseVisualStyleBackColor = true;
-            this.btnLaunchMusicAnalyzer.Click += new System.EventHandler(this.btnLaunchMusicAnalyzer_Click);
-            // 
             // lbxAudioDevices
             // 
             this.lbxAudioDevices.FormattingEnabled = true;
             this.lbxAudioDevices.ItemHeight = 16;
             this.lbxAudioDevices.Location = new System.Drawing.Point(579, 12);
             this.lbxAudioDevices.Name = "lbxAudioDevices";
-            this.lbxAudioDevices.Size = new System.Drawing.Size(153, 116);
+            this.lbxAudioDevices.Size = new System.Drawing.Size(153, 148);
             this.lbxAudioDevices.TabIndex = 13;
             // 
             // btnEnableMusic
             // 
-            this.btnEnableMusic.Location = new System.Drawing.Point(580, 136);
+            this.btnEnableMusic.Location = new System.Drawing.Point(579, 173);
             this.btnEnableMusic.Name = "btnEnableMusic";
-            this.btnEnableMusic.Size = new System.Drawing.Size(152, 42);
+            this.btnEnableMusic.Size = new System.Drawing.Size(153, 52);
             this.btnEnableMusic.TabIndex = 14;
             this.btnEnableMusic.Text = "Enable";
             this.btnEnableMusic.UseVisualStyleBackColor = true;
@@ -192,23 +188,63 @@
             // 
             // btnDisableMusic
             // 
-            this.btnDisableMusic.Location = new System.Drawing.Point(579, 183);
+            this.btnDisableMusic.Location = new System.Drawing.Point(579, 231);
             this.btnDisableMusic.Name = "btnDisableMusic";
-            this.btnDisableMusic.Size = new System.Drawing.Size(152, 42);
+            this.btnDisableMusic.Size = new System.Drawing.Size(153, 52);
             this.btnDisableMusic.TabIndex = 15;
             this.btnDisableMusic.Text = "Disable";
             this.btnDisableMusic.UseVisualStyleBackColor = true;
             this.btnDisableMusic.Click += new System.EventHandler(this.btnDisableMusic_Click);
             // 
+            // tbrRed
+            // 
+            this.tbrRed.LargeChange = 8;
+            this.tbrRed.Location = new System.Drawing.Point(738, 12);
+            this.tbrRed.Maximum = 255;
+            this.tbrRed.Name = "tbrRed";
+            this.tbrRed.Size = new System.Drawing.Size(153, 56);
+            this.tbrRed.TabIndex = 16;
+            // 
+            // tbrGreen
+            // 
+            this.tbrGreen.LargeChange = 8;
+            this.tbrGreen.Location = new System.Drawing.Point(738, 74);
+            this.tbrGreen.Maximum = 255;
+            this.tbrGreen.Name = "tbrGreen";
+            this.tbrGreen.Size = new System.Drawing.Size(153, 56);
+            this.tbrGreen.TabIndex = 17;
+            // 
+            // tbrBlue
+            // 
+            this.tbrBlue.LargeChange = 8;
+            this.tbrBlue.Location = new System.Drawing.Point(738, 136);
+            this.tbrBlue.Maximum = 255;
+            this.tbrBlue.Name = "tbrBlue";
+            this.tbrBlue.Size = new System.Drawing.Size(153, 56);
+            this.tbrBlue.TabIndex = 18;
+            // 
+            // btnSetColor
+            // 
+            this.btnSetColor.Location = new System.Drawing.Point(738, 230);
+            this.btnSetColor.Name = "btnSetColor";
+            this.btnSetColor.Size = new System.Drawing.Size(153, 52);
+            this.btnSetColor.TabIndex = 19;
+            this.btnSetColor.Text = "Set Color";
+            this.btnSetColor.UseVisualStyleBackColor = true;
+            this.btnSetColor.Click += new System.EventHandler(this.btnSetColor_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 311);
+            this.ClientSize = new System.Drawing.Size(992, 311);
+            this.Controls.Add(this.btnSetColor);
+            this.Controls.Add(this.tbrBlue);
+            this.Controls.Add(this.tbrGreen);
+            this.Controls.Add(this.tbrRed);
             this.Controls.Add(this.btnDisableMusic);
             this.Controls.Add(this.btnEnableMusic);
             this.Controls.Add(this.lbxAudioDevices);
-            this.Controls.Add(this.btnLaunchMusicAnalyzer);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -225,6 +261,9 @@
             this.Text = "Shine!";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.tbrIntensity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbrRed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbrGreen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbrBlue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,10 +284,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnLaunchMusicAnalyzer;
         private System.Windows.Forms.ListBox lbxAudioDevices;
         private System.Windows.Forms.Button btnEnableMusic;
         private System.Windows.Forms.Button btnDisableMusic;
+        private System.Windows.Forms.TrackBar tbrRed;
+        private System.Windows.Forms.TrackBar tbrGreen;
+        private System.Windows.Forms.TrackBar tbrBlue;
+        private System.Windows.Forms.Button btnSetColor;
     }
 }
 
