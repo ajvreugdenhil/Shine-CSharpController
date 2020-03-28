@@ -294,7 +294,7 @@
             this.nudMusicProcessorInterval.Size = new System.Drawing.Size(152, 22);
             this.nudMusicProcessorInterval.TabIndex = 28;
             this.nudMusicProcessorInterval.Value = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});

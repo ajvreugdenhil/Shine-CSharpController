@@ -97,7 +97,7 @@ namespace ShineController
         {
             string result = "";
             result += Color.ToString();
-            result += " Stations:";
+            result += " \tStations:";
             if (Stations == null)
             {
                 result += "global";
@@ -111,7 +111,7 @@ namespace ShineController
                 }
             }
             
-            result += $" range:{StartInterestZone}-{EndInterestZone}";
+            result += $" \trange:{StartInterestZone}-{EndInterestZone}";
             return result;
         }
     }

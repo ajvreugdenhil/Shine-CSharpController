@@ -28,6 +28,10 @@ namespace ShineController
             UpdateAnalyzers();
             UpdateAnalyzerData();
 
+            // automatically start with last device
+            // remove when not necessary anymore
+            lbxAudioDevices.SelectedIndex = lbxAudioDevices.Items.Count - 1;
+            btnEnableMusic_Click(null, null);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -132,6 +136,7 @@ namespace ShineController
             Color c = new Color((byte)tbrRed.Value, (byte)tbrGreen.Value, (byte)tbrBlue.Value);
             MusicAnalyzer ma = ((MusicAnalyzer)lbxAnalyzers.SelectedItem);
             ma.Color = c;
+            UpdateAnalyzers();
         }
 
 
