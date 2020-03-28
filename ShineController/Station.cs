@@ -16,5 +16,10 @@ namespace ShineController
             this.ip = ip;
             this.id = deviceID;
         }
+
+        public override string ToString()
+        {
+            return this.id;
+        }
     }
 }

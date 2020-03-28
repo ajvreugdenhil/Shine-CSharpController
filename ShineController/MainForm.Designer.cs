@@ -32,9 +32,6 @@
             this.updateStationsTimer = new System.Windows.Forms.Timer(this.components);
             this.lbxStations = new System.Windows.Forms.ListBox();
             this.btnRequestRegistration = new System.Windows.Forms.Button();
-            this.btnSendColor = new System.Windows.Forms.Button();
-            this.cbxColor = new System.Windows.Forms.ComboBox();
-            this.tbrIntensity = new System.Windows.Forms.TrackBar();
             this.btnRestartStationController = new System.Windows.Forms.Button();
             this.tbxLocalPort = new System.Windows.Forms.TextBox();
             this.tbxRemotePort = new System.Windows.Forms.TextBox();
@@ -49,10 +46,17 @@
             this.tbrGreen = new System.Windows.Forms.TrackBar();
             this.tbrBlue = new System.Windows.Forms.TrackBar();
             this.btnSetColor = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.tbrIntensity)).BeginInit();
+            this.lbxAnalyzers = new System.Windows.Forms.ListBox();
+            this.btnRemoveAnalyzer = new System.Windows.Forms.Button();
+            this.btnAddAnalyzer = new System.Windows.Forms.Button();
+            this.lbxAnalyzerStations = new System.Windows.Forms.ListBox();
+            this.btnAddStation = new System.Windows.Forms.Button();
+            this.btnRemoveStation = new System.Windows.Forms.Button();
+            this.nudMusicProcessorInterval = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.tbrRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbrGreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbrBlue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMusicProcessorInterval)).BeginInit();
             this.SuspendLayout();
             // 
             // updateStationsTimer
@@ -73,38 +77,11 @@
             // 
             this.btnRequestRegistration.Location = new System.Drawing.Point(224, 231);
             this.btnRequestRegistration.Name = "btnRequestRegistration";
-            this.btnRequestRegistration.Size = new System.Drawing.Size(189, 52);
+            this.btnRequestRegistration.Size = new System.Drawing.Size(92, 52);
             this.btnRequestRegistration.TabIndex = 1;
             this.btnRequestRegistration.Text = "request registration";
             this.btnRequestRegistration.UseVisualStyleBackColor = true;
             this.btnRequestRegistration.Click += new System.EventHandler(this.btnRequestRegistration_Click);
-            // 
-            // btnSendColor
-            // 
-            this.btnSendColor.Location = new System.Drawing.Point(420, 231);
-            this.btnSendColor.Name = "btnSendColor";
-            this.btnSendColor.Size = new System.Drawing.Size(153, 52);
-            this.btnSendColor.TabIndex = 2;
-            this.btnSendColor.Text = "send";
-            this.btnSendColor.UseVisualStyleBackColor = true;
-            this.btnSendColor.Click += new System.EventHandler(this.btnSendColor_Click);
-            // 
-            // cbxColor
-            // 
-            this.cbxColor.FormattingEnabled = true;
-            this.cbxColor.Location = new System.Drawing.Point(420, 129);
-            this.cbxColor.Name = "cbxColor";
-            this.cbxColor.Size = new System.Drawing.Size(153, 24);
-            this.cbxColor.TabIndex = 3;
-            // 
-            // tbrIntensity
-            // 
-            this.tbrIntensity.LargeChange = 8;
-            this.tbrIntensity.Location = new System.Drawing.Point(420, 168);
-            this.tbrIntensity.Maximum = 255;
-            this.tbrIntensity.Name = "tbrIntensity";
-            this.tbrIntensity.Size = new System.Drawing.Size(153, 56);
-            this.tbrIntensity.TabIndex = 4;
             // 
             // btnRestartStationController
             // 
@@ -171,14 +148,14 @@
             // 
             this.lbxAudioDevices.FormattingEnabled = true;
             this.lbxAudioDevices.ItemHeight = 16;
-            this.lbxAudioDevices.Location = new System.Drawing.Point(579, 12);
+            this.lbxAudioDevices.Location = new System.Drawing.Point(419, 12);
             this.lbxAudioDevices.Name = "lbxAudioDevices";
-            this.lbxAudioDevices.Size = new System.Drawing.Size(153, 148);
+            this.lbxAudioDevices.Size = new System.Drawing.Size(153, 116);
             this.lbxAudioDevices.TabIndex = 13;
             // 
             // btnEnableMusic
             // 
-            this.btnEnableMusic.Location = new System.Drawing.Point(579, 173);
+            this.btnEnableMusic.Location = new System.Drawing.Point(419, 173);
             this.btnEnableMusic.Name = "btnEnableMusic";
             this.btnEnableMusic.Size = new System.Drawing.Size(153, 52);
             this.btnEnableMusic.TabIndex = 14;
@@ -188,7 +165,7 @@
             // 
             // btnDisableMusic
             // 
-            this.btnDisableMusic.Location = new System.Drawing.Point(579, 231);
+            this.btnDisableMusic.Location = new System.Drawing.Point(419, 231);
             this.btnDisableMusic.Name = "btnDisableMusic";
             this.btnDisableMusic.Size = new System.Drawing.Size(153, 52);
             this.btnDisableMusic.TabIndex = 15;
@@ -199,33 +176,36 @@
             // tbrRed
             // 
             this.tbrRed.LargeChange = 8;
-            this.tbrRed.Location = new System.Drawing.Point(738, 12);
+            this.tbrRed.Location = new System.Drawing.Point(1220, 44);
             this.tbrRed.Maximum = 255;
             this.tbrRed.Name = "tbrRed";
             this.tbrRed.Size = new System.Drawing.Size(153, 56);
             this.tbrRed.TabIndex = 16;
+            this.tbrRed.Value = 254;
             // 
             // tbrGreen
             // 
             this.tbrGreen.LargeChange = 8;
-            this.tbrGreen.Location = new System.Drawing.Point(738, 74);
+            this.tbrGreen.Location = new System.Drawing.Point(1220, 106);
             this.tbrGreen.Maximum = 255;
             this.tbrGreen.Name = "tbrGreen";
             this.tbrGreen.Size = new System.Drawing.Size(153, 56);
             this.tbrGreen.TabIndex = 17;
+            this.tbrGreen.Value = 255;
             // 
             // tbrBlue
             // 
             this.tbrBlue.LargeChange = 8;
-            this.tbrBlue.Location = new System.Drawing.Point(738, 136);
+            this.tbrBlue.Location = new System.Drawing.Point(1220, 168);
             this.tbrBlue.Maximum = 255;
             this.tbrBlue.Name = "tbrBlue";
             this.tbrBlue.Size = new System.Drawing.Size(153, 56);
             this.tbrBlue.TabIndex = 18;
+            this.tbrBlue.Value = 5;
             // 
             // btnSetColor
             // 
-            this.btnSetColor.Location = new System.Drawing.Point(738, 230);
+            this.btnSetColor.Location = new System.Drawing.Point(1220, 230);
             this.btnSetColor.Name = "btnSetColor";
             this.btnSetColor.Size = new System.Drawing.Size(153, 52);
             this.btnSetColor.TabIndex = 19;
@@ -233,11 +213,105 @@
             this.btnSetColor.UseVisualStyleBackColor = true;
             this.btnSetColor.Click += new System.EventHandler(this.btnSetColor_Click);
             // 
+            // lbxAnalyzers
+            // 
+            this.lbxAnalyzers.FormattingEnabled = true;
+            this.lbxAnalyzers.ItemHeight = 16;
+            this.lbxAnalyzers.Location = new System.Drawing.Point(578, 12);
+            this.lbxAnalyzers.Name = "lbxAnalyzers";
+            this.lbxAnalyzers.Size = new System.Drawing.Size(435, 148);
+            this.lbxAnalyzers.TabIndex = 20;
+            this.lbxAnalyzers.SelectedIndexChanged += new System.EventHandler(this.lbxAnalyzers_SelectedIndexChanged);
+            // 
+            // btnRemoveAnalyzer
+            // 
+            this.btnRemoveAnalyzer.Location = new System.Drawing.Point(578, 231);
+            this.btnRemoveAnalyzer.Name = "btnRemoveAnalyzer";
+            this.btnRemoveAnalyzer.Size = new System.Drawing.Size(435, 52);
+            this.btnRemoveAnalyzer.TabIndex = 21;
+            this.btnRemoveAnalyzer.Text = "remove";
+            this.btnRemoveAnalyzer.UseVisualStyleBackColor = true;
+            this.btnRemoveAnalyzer.Click += new System.EventHandler(this.btnRemoveAnalyzer_Click);
+            // 
+            // btnAddAnalyzer
+            // 
+            this.btnAddAnalyzer.Location = new System.Drawing.Point(578, 172);
+            this.btnAddAnalyzer.Name = "btnAddAnalyzer";
+            this.btnAddAnalyzer.Size = new System.Drawing.Size(435, 52);
+            this.btnAddAnalyzer.TabIndex = 23;
+            this.btnAddAnalyzer.Text = "Add Analyzer";
+            this.btnAddAnalyzer.UseVisualStyleBackColor = true;
+            this.btnAddAnalyzer.Click += new System.EventHandler(this.btnAddAnalyzer_Click);
+            // 
+            // lbxAnalyzerStations
+            // 
+            this.lbxAnalyzerStations.FormattingEnabled = true;
+            this.lbxAnalyzerStations.ItemHeight = 16;
+            this.lbxAnalyzerStations.Location = new System.Drawing.Point(1019, 12);
+            this.lbxAnalyzerStations.Name = "lbxAnalyzerStations";
+            this.lbxAnalyzerStations.Size = new System.Drawing.Size(194, 212);
+            this.lbxAnalyzerStations.TabIndex = 24;
+            // 
+            // btnAddStation
+            // 
+            this.btnAddStation.Location = new System.Drawing.Point(322, 230);
+            this.btnAddStation.Name = "btnAddStation";
+            this.btnAddStation.Size = new System.Drawing.Size(91, 52);
+            this.btnAddStation.TabIndex = 26;
+            this.btnAddStation.Text = "add";
+            this.btnAddStation.UseVisualStyleBackColor = true;
+            this.btnAddStation.Click += new System.EventHandler(this.btnAddStation_Click);
+            // 
+            // btnRemoveStation
+            // 
+            this.btnRemoveStation.Location = new System.Drawing.Point(1019, 230);
+            this.btnRemoveStation.Name = "btnRemoveStation";
+            this.btnRemoveStation.Size = new System.Drawing.Size(194, 52);
+            this.btnRemoveStation.TabIndex = 27;
+            this.btnRemoveStation.Text = "remove";
+            this.btnRemoveStation.UseVisualStyleBackColor = true;
+            this.btnRemoveStation.Click += new System.EventHandler(this.btnRemoveStation_Click);
+            // 
+            // nudMusicProcessorInterval
+            // 
+            this.nudMusicProcessorInterval.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudMusicProcessorInterval.Location = new System.Drawing.Point(419, 140);
+            this.nudMusicProcessorInterval.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.nudMusicProcessorInterval.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudMusicProcessorInterval.Name = "nudMusicProcessorInterval";
+            this.nudMusicProcessorInterval.Size = new System.Drawing.Size(152, 22);
+            this.nudMusicProcessorInterval.TabIndex = 28;
+            this.nudMusicProcessorInterval.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudMusicProcessorInterval.ValueChanged += new System.EventHandler(this.nudMusicProcessorInterval_ValueChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 311);
+            this.ClientSize = new System.Drawing.Size(1385, 311);
+            this.Controls.Add(this.nudMusicProcessorInterval);
+            this.Controls.Add(this.btnRemoveStation);
+            this.Controls.Add(this.btnAddStation);
+            this.Controls.Add(this.lbxAnalyzerStations);
+            this.Controls.Add(this.btnAddAnalyzer);
+            this.Controls.Add(this.btnRemoveAnalyzer);
+            this.Controls.Add(this.lbxAnalyzers);
             this.Controls.Add(this.btnSetColor);
             this.Controls.Add(this.tbrBlue);
             this.Controls.Add(this.tbrGreen);
@@ -252,18 +326,16 @@
             this.Controls.Add(this.tbxRemotePort);
             this.Controls.Add(this.tbxLocalPort);
             this.Controls.Add(this.btnRestartStationController);
-            this.Controls.Add(this.tbrIntensity);
-            this.Controls.Add(this.cbxColor);
-            this.Controls.Add(this.btnSendColor);
             this.Controls.Add(this.btnRequestRegistration);
             this.Controls.Add(this.lbxStations);
             this.Name = "MainForm";
             this.Text = "Shine!";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.tbrIntensity)).EndInit();
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tbrRed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbrGreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbrBlue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMusicProcessorInterval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,9 +346,6 @@
         private System.Windows.Forms.Timer updateStationsTimer;
         private System.Windows.Forms.ListBox lbxStations;
         private System.Windows.Forms.Button btnRequestRegistration;
-        private System.Windows.Forms.Button btnSendColor;
-        private System.Windows.Forms.ComboBox cbxColor;
-        private System.Windows.Forms.TrackBar tbrIntensity;
         private System.Windows.Forms.Button btnRestartStationController;
         private System.Windows.Forms.TextBox tbxLocalPort;
         private System.Windows.Forms.TextBox tbxRemotePort;
@@ -291,6 +360,13 @@
         private System.Windows.Forms.TrackBar tbrGreen;
         private System.Windows.Forms.TrackBar tbrBlue;
         private System.Windows.Forms.Button btnSetColor;
+        private System.Windows.Forms.ListBox lbxAnalyzers;
+        private System.Windows.Forms.Button btnRemoveAnalyzer;
+        private System.Windows.Forms.Button btnAddAnalyzer;
+        private System.Windows.Forms.ListBox lbxAnalyzerStations;
+        private System.Windows.Forms.Button btnAddStation;
+        private System.Windows.Forms.Button btnRemoveStation;
+        private System.Windows.Forms.NumericUpDown nudMusicProcessorInterval;
     }
 }
 
