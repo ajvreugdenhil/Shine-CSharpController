@@ -24,14 +24,14 @@ namespace ShineController
             sc.RequestRegistration();
             PopulateStationsListbox();
             RestartMusicProcessor();
-            mp.musicAnalyzers.Add(new MusicAnalyzer(new Color(Convert.ToByte(tbrRed.Value), Convert.ToByte(tbrGreen.Value), Convert.ToByte(tbrBlue.Value)), sc, null));
+            mp.musicAnalyzers.Add(new MusicAnalyzer(new Color(Convert.ToByte(tbrRed.Value), Convert.ToByte(tbrGreen.Value), Convert.ToByte(tbrBlue.Value)), sc, new List<Station>()));
             UpdateAnalyzers();
             UpdateAnalyzerData();
 
             // automatically start with last device
             // remove when not necessary anymore
             lbxAudioDevices.SelectedIndex = lbxAudioDevices.Items.Count - 1;
-            btnEnableMusic_Click(null, null);
+            //btnEnableMusic_Click(null, null);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -186,6 +186,9 @@ namespace ShineController
             tbrBlue.Value = selectedAnalyzer.Color.Blue;
             tbrGreen.Value = selectedAnalyzer.Color.Green;
             tbrRed.Value = selectedAnalyzer.Color.Red;
+
+            tbrMaxInterestFreq.Value = selectedAnalyzer.EndInterestZone;
+            tbrMinInterstFreq.Value = selectedAnalyzer.StartInterestZone;
         }
 
         private void btnAddStation_Click(object sender, EventArgs e)
@@ -215,7 +218,7 @@ namespace ShineController
 
         private void btnAddAnalyzer_Click(object sender, EventArgs e)
         {
-            mp.musicAnalyzers.Add(new MusicAnalyzer(new Color(0, 0, 0), sc, null));
+            mp.musicAnalyzers.Add(new MusicAnalyzer(new Color(0, 0, 0), sc, new List<Station>()));
             UpdateAnalyzers();
             UpdateAnalyzerData();
         }
@@ -235,6 +238,36 @@ namespace ShineController
         private void nudMusicProcessorInterval_ValueChanged(object sender, EventArgs e)
         {
             mp.interval = (int)nudMusicProcessorInterval.Value;
+        }
+
+        private void nudSpectrumWidth_ValueChanged(object sender, EventArgs e)
+        {
+            // TODO: check if restart is necessary
+            int width = (int)nudSpectrumWidth.Value;
+            mp._lines = width;
+            tbrMaxInterestFreq.Maximum = width;
+            tbrMinInterstFreq.Maximum = width;
+        }
+
+        private void nudSpectrumdataHistoryLength_ValueChanged(object sender, EventArgs e)
+        {
+            // TODO: check if restart is necessary
+            mp.spectrumdataHistoryLength = (int)nudSpectrumdataHistoryLength.Value;
+        }
+
+        private void btnSetInterestZone_Click(object sender, EventArgs e)
+        {
+            MusicAnalyzer ma = ((MusicAnalyzer)lbxAnalyzers.SelectedItem);
+            ma.StartInterestZone = tbrMinInterstFreq.Value;
+            ma.EndInterestZone = tbrMaxInterestFreq.Value;
+
+            UpdateAnalyzers();
+            UpdateAnalyzerData();
+        }
+
+        private void lbxAnalyzerStations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

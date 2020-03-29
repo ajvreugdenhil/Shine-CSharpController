@@ -29,9 +29,9 @@ namespace ShineController
         private List<byte> spectrumdata;   //spectrum data buffer
         public List<AudioDevice> _devicelist;       //device list
         public bool _initialized;          //initialized flag
-        private int _lines;            // number of spectrum lines
+        public int _lines;            // number of spectrum lines
         private List<List<byte>> spectrumdataHistory;
-        private int spectrumdataHistoryLength;
+        public int spectrumdataHistoryLength;
 
         // lines 64, sdhistorylength 1600
         public MusicProcessor(StationController sc, int interval, int spectrumWidth, int spectrumdataHistoryLength)

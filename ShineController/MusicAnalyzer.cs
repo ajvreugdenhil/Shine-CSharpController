@@ -9,6 +9,7 @@ namespace ShineController
     class MusicAnalyzer
     {
         private StationController sc;
+        
 
         public MusicAnalyzer(Color color, StationController sc, List<Station> stations)
         {
@@ -75,20 +76,36 @@ namespace ShineController
 
             if (InterestVolume < 0) InterestVolume = 0;
             if (InterestVolume > 254) InterestVolume = 254;
-            
-            if (Stations == null)
+
+            int newRed = (int)(InterestVolume * ((double)Color.Red / 255));
+            int newGreen = (int)(InterestVolume * ((double)Color.Green / 255));
+            int newBlue = (int)(InterestVolume * ((double)Color.Blue / 255));
+
+            if (Stations.Count == 0)
             {
-                sc.SendColor(ColorChannel.Red, (int)(InterestVolume * ((double)Color.Red / 255)));
-                sc.SendColor(ColorChannel.Green, (int)(InterestVolume * ((double)Color.Green / 255)));
-                sc.SendColor(ColorChannel.Blue, (int)(InterestVolume * ((double)Color.Blue / 255)));
+                sc.SendColor(ColorChannel.Red, newRed);
+                sc.SendColor(ColorChannel.Green, newGreen);
+                sc.SendColor(ColorChannel.Blue, newBlue);
             }
             else
             {
                 foreach (Station s in Stations)
                 {
-                    sc.SendColor(ColorChannel.Red, (int)(InterestVolume * ((double)Color.Red / 255)), s.id);
-                    sc.SendColor(ColorChannel.Green, (int)(InterestVolume * ((double)Color.Green / 255)), s.id);
-                    sc.SendColor(ColorChannel.Blue, (int)(InterestVolume * ((double)Color.Blue / 255)), s.id);
+                    if (s.Color.Red != newRed)
+                    {
+                        s.Color.Red = (byte)newRed;
+                        sc.SendColor(ColorChannel.Red, newRed, s.id);
+                    }
+                    if (s.Color.Green != newGreen)
+                    {
+                        s.Color.Green = (byte)newGreen;
+                        sc.SendColor(ColorChannel.Green, newGreen, s.id);
+                    }
+                    if (s.Color.Blue != newBlue)
+                    {
+                        s.Color.Blue = (byte)newBlue;
+                        sc.SendColor(ColorChannel.Blue, newBlue, s.id);
+                    }
                 }
             }
         }
