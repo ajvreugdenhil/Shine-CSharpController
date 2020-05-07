@@ -15,6 +15,17 @@ namespace ShineController
         {
             this.ip = ip;
             this.id = deviceID;
+            this.Color = new Color(0, 0, 0);
+        }
+
+        public Color Color
+        {
+            get; set;
+        }
+
+        public override string ToString()
+        {
+            return this.id;
         }
     }
 }

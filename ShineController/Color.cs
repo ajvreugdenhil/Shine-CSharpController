@@ -18,5 +18,10 @@ namespace ShineController
             Green = g;
             Blue = b;
         }
+
+        public override string ToString()
+        {
+            return $"R:{Red} G:{Green} B:{Blue}";
+        }
     }
 }
